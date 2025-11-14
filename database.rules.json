@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "messages": {
+      "global": {
+        ".read": true,
+        ".write": "auth != null"
+      },
+      "direct": {
+        ".read": true,
+        ".write": "auth != null"
+      }
+    },
+    "presence": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}
