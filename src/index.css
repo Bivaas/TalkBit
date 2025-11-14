@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Alternative approach if IDE doesn't recognize @tailwind:
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+*/
+
+body {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.dark {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Navbar Animations */
+.nav-link {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #f97316, #f59e0b);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::before {
+  width: 80%;
+}
+
+.nav-link:hover {
+  color: #fb923c;
+  background-color: rgba(249, 115, 22, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-link:active {
+  transform: translateY(0) scale(0.95);
+  background-color: rgba(249, 115, 22, 0.2);
+}
+
+/* Mobile Menu Animations */
+.mobile-menu {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top;
+}
+
+.mobile-menu.open {
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu.closed {
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+/* Mobile Menu Items Animation */
+.mobile-nav-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.mobile-nav-item.animate {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.mobile-nav-item:hover {
+  background-color: rgba(249, 115, 22, 0.1);
+  padding-left: 1.5rem;
+  border-left: 3px solid #f97316;
+}
+
+/* Hamburger Menu Animation */
+.hamburger {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger:hover {
+  color: #fb923c;
+  transform: scale(1.1);
+}
+
+.hamburger:active {
+  transform: scale(0.9);
+}
+
+/* Button Animations */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+}
+
+/* Scroll-based Navbar */
+.navbar-scrolled {
+  background-color: rgba(31, 41, 55, 0.95) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Section Reveal Animation */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Animation for Cards */
+.card-stagger {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-stagger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced Hover Effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+/* Subtle Breathing Animation for Important Elements */
+.subtle-breathe {
+  animation: subtleBreathe 4s ease-in-out infinite;
+}
+
+@keyframes subtleBreathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
+/* Very Subtle Glow Animation */
+.subtle-glow {
+  animation: subtleGlow 3s ease-in-out infinite;
+}
+
+@keyframes subtleGlow {
+  0%, 100% {
+    box-shadow: 0 0 3px rgba(249, 115, 22, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
+  }
+}
+
+/* Minimal Pulse for Icons */
+.minimal-pulse {
+  animation: minimalPulse 3s ease-in-out infinite;
+}
+
+@keyframes minimalPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Dark theme select options styling */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select option {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+select option:hover {
+  background-color: #334155;
+  color: #ffffff;
+}
+
+select option:checked {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* Firefox specific styling for select options */
+select::-moz-listbox {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+select::-moz-option {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+select::-moz-option:hover {
+  background-color: #334155;
+}
