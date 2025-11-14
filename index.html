@@ -1,14 +1,92 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Essential Meta Tags -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/ishu traders logo-sqr.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notice Board</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Announcy - Secure Notice Board & Announcement Management System</title>
+    <meta name="description" content="Announcy is a modern, secure notice board and announcement management system with Firebase authentication, real-time updates, and admin controls for organizations." />
+    <meta name="keywords" content="notice board, announcements, updates, notifications, news feed, management system, real-time updates, firebase, authentication" />
+    <meta name="author" content="Bivaas" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://announcy.vercel.app/" />
+    <meta property="og:title" content="Announcy - Notice Board & Announcement System" />
+    <meta property="og:description" content="A modern, secure notice board application with real-time announcements, admin controls, and authentication." />
+    <meta property="og:image" content="/bell.png" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://announcy.vercel.app/" />
+    <meta property="twitter:title" content="Announcy - Notice Board & Announcement System" />
+    <meta property="twitter:description" content="A modern, secure notice board application with real-time announcements, admin controls, and authentication." />
+    <meta property="twitter:image" content="/bell.png" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Announcy" />
+    
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/jpeg" href="/bell.png" />
+    <link rel="apple-touch-icon" href="/bell.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-jRxJ+xmEnQBD4khsrot+zxXOv464IQxP/10dSOUUWnqXmEC2JyNvsWHwSQNislquFjpf2V3twQImpNqIrmA5Hw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Preconnect to External Resources -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Announcy",
+      "description": "A modern notice board and announcement management system with secure authentication and real-time updates",
+      "url": "https://announcy.vercel.app/",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Bivaas"
+      },
+      "featureList": [
+        "Real-time announcement updates",
+        "Secure Firebase authentication",
+        "Google account login",
+        "Admin-only posting controls",
+        "Category and priority filtering",
+        "Dark theme UI",
+        "Responsive design",
+        "Search functionality"
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!-- Main Application Root -->
     <div id="root"></div>
+    
+    <!-- Main Application Script -->
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Analytics & Tracking (Optional - Add your tracking code here) -->
+    <!-- Google Analytics, Hotjar, or other analytics tools can be added here -->
   </body>
 </html>
