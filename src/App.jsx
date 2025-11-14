@@ -264,7 +264,7 @@ export default function NoticeBoard() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
       {/* Header */}
       <header className="bg-white/10 backdrop-blur-md border-b border-white/10 sticky top-0 z-40">
         <div className="max-w-full mx-auto px-8 sm:px-12 lg:px-16">
@@ -313,7 +313,7 @@ export default function NoticeBoard() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-full mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 py-8">
+      <main className="flex-1 max-w-full mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 py-8 w-full">
         {/* Search and Filters */}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 mb-8 border border-white/10 shadow-xl">
           <div className="flex flex-col sm:flex-row gap-4">
@@ -565,6 +565,23 @@ export default function NoticeBoard() {
           </div>
         </div>
       )}
+
+      {/* Footer */}
+      <footer className="bg-white/5 backdrop-blur border-t border-white/10 py-4 sm:py-6 mt-auto w-full">
+        <div className="max-w-full mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 text-center">
+          <p className="text-slate-400 text-xs sm:text-sm">
+            Made by{' '}
+            <a
+              href="https://bivaasbaral.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-cyan-300 font-medium transition-colors duration-200"
+            >
+              Bivaas Baral
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
