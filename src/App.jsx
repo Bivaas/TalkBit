@@ -185,6 +185,19 @@ function App() {
               </p>
             </div>
           </div>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://bivaasbaral.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Visit my portfolio website"
+              aria-label="Visit my site"
+              className="flex items-center gap-2 px-3 py-1 rounded-md transition-transform duration-200 ease-out transform bg-transparent hover:bg-white/5 hover:-translate-y-0.5 hover:shadow-sm"
+            >
+              <span className="hidden sm:inline text-xs md:text-sm text-gray-500">Made by</span>
+              <span className="text-sm md:text-base font-medium text-indigo-600 leading-none">Bivaas Baral</span>
+            </a>
+          </div>
         </div>
         
         <div className="flex-1 overflow-hidden">
