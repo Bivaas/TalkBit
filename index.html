@@ -8,7 +8,7 @@
     
     <!-- SEO Meta Tags -->
     <title>TalkBit</title>
-    <meta name="description" content="A real-time chat application built with React and Firebase. Supports global chat, direct messaging, and user presence." />
+    <meta name="description" content="TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design." />
     <meta name="keywords" content="chat, react, firebase, real-time, messaging, chat application" />
     <meta name="author" content="Bivaas" />
     <meta name="robots" content="index, follow" />
@@ -18,23 +18,23 @@
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://react-chat-app.vercel.app/" />
-    <meta property="og:title" content="React Chat App" />
-    <meta property="og:description" content="A real-time chat application with Firebase integration, supporting group and private chats." />
+    <meta property="og:title" content="TalkBit" />
+    <meta property="og:description" content="TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design." />
     <meta property="og:image" content="/bell.png" />
     <meta property="og:locale" content="en_US" />
     
     <!-- Twitter Card Meta Tags -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://react-chat-app.vercel.app/" />
-    <meta property="twitter:title" content="React Chat App" />
-    <meta property="twitter:description" content="A real-time chat application with Firebase integration, supporting group and private chats." />
+    <meta property="twitter:title" content="TalkBit" />
+    <meta property="twitter:description" content="TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design." />
     <meta property="twitter:image" content="/bell.png" />
     
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#0f172a" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="React Chat App" />
+    <meta name="apple-mobile-web-app-title" content="TalkBit" />
     
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/jpeg" href="/bell.png" />
@@ -52,8 +52,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "React Chat App",
-      "description": "A real-time chat application built with React and Firebase, featuring global and direct messaging.",
+      "name": "TalkBit",
+      "description": "TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design.",
       "url": "https://react-chat-app.vercel.app/",
       "applicationCategory": "CommunicationApplication",
       "offers": {
@@ -66,21 +66,37 @@
         "name": "Bivaas"
       },
       "featureList": [
-        "Real-time chat",
+        "Real-time global and private chat",
         "Secure Firebase authentication",
-        "Google account login",
-        "Guest login",
-        "Direct messaging",
-        "User presence",
-        "Admin dashboard",
-        "Responsive design"
+        "Google and guest login options",
+        "Direct and group messaging",
+        "User presence and status",
+        "Admin dashboard for user management",
+        "Modern, responsive design",
+        "Emoji and media support"
       ]
     }
     </script>
   </head>
   <body>
     <!-- Main Application Root -->
-    <div id="root"></div>
+    <main>
+      <h1 style="text-align:center;margin-top:2rem;font-size:2.5rem;">TalkBit</h1>
+      <section style="max-width:600px;margin:2rem auto 1rem auto;padding:1.5rem;background:#f8fafc;border-radius:1rem;box-shadow:0 2px 8px #0001;">
+        <h2 style="font-size:1.5rem;margin-bottom:1rem;">Features</h2>
+        <ul style="font-size:1.1rem;line-height:1.7;">
+          <li>Real-time global and private chat</li>
+          <li>Secure Firebase authentication</li>
+          <li>Google and guest login options</li>
+          <li>Direct and group messaging</li>
+          <li>User presence and status</li>
+          <li>Admin dashboard for user management</li>
+          <li>Modern, responsive design</li>
+          <li>Emoji and media support</li>
+        </ul>
+      </section>
+      <div id="root"></div>
+    </main>
     
     <!-- Main Application Script -->
     <script type="module" src="/src/main.jsx"></script>
