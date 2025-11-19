@@ -13,7 +13,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @apply bg-gray-50;
+  @apply bg-gray-900 text-gray-100;
+  background: linear-gradient(120deg, #18181b 0%, #23272f 100%);
+  min-height: 100vh;
 }
 
 code {
@@ -30,13 +32,32 @@ code {
   background: transparent;
 }
 
+
+
+
+
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: #374151;
   border-radius: 3px;
+  opacity: 0.7;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #6b7280;
+}
+/* Frosted glass card utility */
+.frosted-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+}
+
+/* Card shadow for minimal look */
+.minimal-shadow {
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
 }
 
 /* Animations */

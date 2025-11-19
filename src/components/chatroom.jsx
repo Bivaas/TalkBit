@@ -48,7 +48,6 @@ function ChatRoom({ currentUser, activeChat, users }) {
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!message.trim()) return;
-    
     const newMessage = {
       senderId: currentUser.id,
       senderName: currentUser.name,
@@ -62,7 +61,6 @@ function ChatRoom({ currentUser, activeChat, users }) {
     setMessages(prev => [...prev, localMsg]);
     setMessage('');
     inputRef.current?.focus();
-
     // Persist message in Realtime Database (works for guests and authenticated users)
     (async () => {
       try {
@@ -71,16 +69,13 @@ function ChatRoom({ currentUser, activeChat, users }) {
           chatId: activeChat === 'global' ? 'global' : [currentUser.id, activeChat].sort().join('_'),
           timestamp: Date.now(),
         };
-
         if (activeChat === 'global') {
           const ref = rref(rtdb, 'messages/global');
           await push(ref, payload);
-          console.log('Message sent to global chat:', payload);
         } else {
           const chatId = [currentUser.id, activeChat].sort().join('_');
           const ref = rref(rtdb, `messages/direct/${chatId}`);
           await push(ref, payload);
-          console.log('Message sent to direct chat:', chatId, payload);
         }
       } catch (err) {
         console.error('Failed to send message to RTDB:', err);
@@ -106,21 +101,29 @@ function ChatRoom({ currentUser, activeChat, users }) {
   };
 
   const getSenderName = (senderId) => {
-    // First try to get from senderName field in the message itself
-    // If not available, look up from users array, fallback to 'Unknown'
     const sender = users.find(u => u.id === senderId);
     return sender ? sender.name : 'Unknown';
   };
 
+  // Prevent guests from accessing private DM
+  if (activeChat !== 'global' && currentUser.isGuest) {
+    return (
+      <div className="flex flex-col h-full items-center justify-center text-gray-500">
+        <p className="text-lg font-medium">Private messaging is available only for registered users.</p>
+        <p className="text-sm mt-2">Please sign in to access this feature.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-gray-950">
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-white to-gray-50">
+      <div className="flex-1 overflow-y-auto p-6 space-y-4">
         {filteredMessages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-gray-400">
-            <div className="text-6xl mb-4 opacity-50">💬</div>
-            <p className="text-lg font-medium text-gray-600">No messages yet</p>
-            <p className="text-sm mt-2 text-gray-500">Start the conversation!</p>
+          <div className="flex flex-col items-center justify-center h-full text-gray-500">
+            <div className="text-6xl mb-4 opacity-40 animate-pulse">💬</div>
+            <p className="text-lg font-medium text-gray-400">No messages yet</p>
+            <p className="text-sm mt-2 text-gray-600">Start the conversation!</p>
           </div>
         ) : (
           filteredMessages.map(msg => (
@@ -128,27 +131,28 @@ function ChatRoom({ currentUser, activeChat, users }) {
               key={msg.id}
               className={`flex ${msg.senderId === currentUser.id ? 'justify-end' : 'justify-start'} mb-2`}
             >
-              <div className={`flex ${msg.senderId === currentUser.id ? 'flex-row-reverse' : 'flex-row'} gap-2 max-w-sm`}>
+              <div className={`flex ${msg.senderId === currentUser.id ? 'flex-row-reverse' : 'flex-row'} gap-2 max-w-sm`}
+                style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
                 <div className="flex-shrink-0">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${
-                    msg.senderId === currentUser.id ? 'bg-indigo-500' : 'bg-emerald-500'
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-medium shadow-lg ${
+                    msg.senderId === currentUser.id ? 'bg-indigo-600' : 'bg-emerald-600'
                   }`}>
                     {(msg.senderName || 'U').charAt(0).toUpperCase()}
                   </div>
                 </div>
                 <div className={`flex flex-col ${msg.senderId === currentUser.id ? 'items-end' : 'items-start'}`}>
-                  <p className="text-xs text-gray-600 font-semibold px-3 mb-1">
+                  <p className="text-xs text-gray-400 font-semibold px-3 mb-1">
                     {msg.senderName || 'Unknown'}
                   </p>
                   <div
-                    className={`message-bubble ${
+                    className={`frosted-card minimal-shadow p-3 ${
                       msg.senderId === currentUser.id
-                        ? 'message-bubble-own'
-                        : 'message-bubble-other'
+                        ? 'bg-indigo-900/60 text-indigo-100'
+                        : 'bg-gray-800/60 text-gray-100'
                     }`}
                   >
                     <p className="text-sm leading-relaxed">{msg.text}</p>
-                    <p className={`text-xs mt-2 opacity-70 ${msg.senderId === currentUser.id ? 'text-indigo-200' : 'text-gray-500'}`}>
+                    <p className={`text-xs mt-2 opacity-70 ${msg.senderId === currentUser.id ? 'text-indigo-300' : 'text-gray-400'}`}>
                       {formatTime(msg.timestamp)}
                     </p>
                   </div>
@@ -159,14 +163,13 @@ function ChatRoom({ currentUser, activeChat, users }) {
         )}
         <div ref={messagesEndRef} />
       </div>
-      
       {/* Message Input */}
-      <div className="border-t border-gray-200 p-4 bg-white">
+      <div className="border-t border-gray-800 p-4 bg-gray-900">
         <form onSubmit={handleSendMessage} className="flex items-center gap-3">
           <input
             ref={inputRef}
             type="text"
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:shadow-md transition-all duration-300 placeholder-gray-400"
+            className="flex-1 px-4 py-3 border border-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:shadow-md transition-all duration-300 placeholder-gray-400 bg-gray-800 text-gray-100"
             placeholder={`Message ${activeChat === 'global' ? 'everyone' : getSenderName(activeChat)}...`}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -174,7 +177,7 @@ function ChatRoom({ currentUser, activeChat, users }) {
           />
           <button
             type="submit"
-            className="p-3 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-110 active:scale-95 button-hover"
+            className="p-3 bg-indigo-700 text-white rounded-full hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-110 active:scale-95 button-hover"
           >
             <FiSend className="text-lg" />
           </button>

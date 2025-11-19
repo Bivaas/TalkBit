@@ -27,7 +27,12 @@ function App() {
         const isAdminUser = fbUser.email === ADMIN_EMAIL;
         setIsAdmin(isAdminUser);
 
-        const profile = { id: fbUser.uid, name: fbUser.email ? fbUser.email.split('@')[0] : fbUser.displayName || 'User', email: fbUser.email, isGuest: fbUser.isAnonymous };
+        const profile = {
+          id: fbUser.uid,
+          name: fbUser.displayName || fbUser.email.split('@')[0], // Use displayName if available
+          email: fbUser.email,
+          isGuest: fbUser.isAnonymous
+        };
         setUser(profile);
         localStorage.setItem('chatUser', JSON.stringify(profile));
 
@@ -43,7 +48,11 @@ function App() {
         // No firebase user; try local guest
         setIsAdmin(false);
         const savedUser = localStorage.getItem('chatUser');
-        if (savedUser) setUser(JSON.parse(savedUser));
+        if (savedUser) {
+          const parsedUser = JSON.parse(savedUser);
+          profile.name = parsedUser.name || profile.name; // Use saved username if available
+          setUser(profile);
+        }
       }
     });
 
@@ -107,47 +116,46 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-950">
       {/* User List Sidebar */}
-      <div className={`${showUserList ? 'w-full md:w-72' : 'hidden md:block md:w-72'} bg-white border-r border-gray-200 flex flex-col shadow-sm transition-all duration-300`}>
-        <div className="p-5 border-b border-gray-200 bg-gradient-to-br from-indigo-50 to-white">
+      <div className={`${showUserList ? 'w-full md:w-72' : 'hidden md:block md:w-72'} bg-gray-950 border-r border-gray-800 flex flex-col transition-all duration-300`}>
+        <div className="p-5 border-b border-gray-800 bg-gray-950">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-              <FiUsers className="text-indigo-600" size={20} /> Chats
+            <h2 className="text-lg font-bold text-gray-100 flex items-center gap-2">
+              <FiUsers className="text-indigo-400" size={20} /> Chats
             </h2>
             <div className="flex items-center gap-2">
               {isAdmin && (
                 <button
                   onClick={() => setShowAdminDashboard(true)}
-                  className="p-2 rounded-full hover:bg-red-100 transition-all duration-300 group"
+                  className="p-2 rounded-full hover:bg-red-900 transition-all duration-300 group"
                   title="Admin Dashboard"
                 >
-                  <FiShield className="text-red-600 group-hover:text-red-700 transition-colors" size={20} />
+                  <FiShield className="text-red-400 group-hover:text-red-500 transition-colors" size={20} />
                 </button>
               )}
               <button
                 onClick={handleLogout}
-                className="p-2 rounded-full hover:bg-red-50 transition-all duration-300 group"
+                className="p-2 rounded-full hover:bg-red-900 transition-all duration-300 group"
                 title="Logout"
               >
-                <FiLogOut className="text-gray-600 group-hover:text-red-500 transition-colors" size={20} />
+                <FiLogOut className="text-gray-400 group-hover:text-red-400 transition-colors" size={20} />
               </button>
             </div>
           </div>
-          <div className="flex items-center gap-3 bg-white rounded-xl p-3 shadow-sm">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-bold shadow-md">
+          <div className="flex items-center gap-3 bg-gray-950 rounded-xl p-3 shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-700 to-indigo-900 flex items-center justify-center text-white font-bold shadow-md">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-gray-900 truncate">{user.name}</p>
+              <p className="text-sm font-semibold text-gray-100 truncate">{user.name}</p>
               <div className="flex items-center gap-1">
                 <span className="online-indicator"></span>
-                <p className="text-xs text-green-600 font-medium">Online</p>
+                <p className="text-xs text-green-400 font-medium">Online</p>
               </div>
             </div>
           </div>
         </div>
-        
         <div className="flex-1 overflow-y-auto">
           <UserList 
             users={users} 
@@ -159,28 +167,28 @@ function App() {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 flex flex-col bg-white">
-        <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm">
+      <div className="flex-1 flex flex-col bg-gray-950">
+        <div className="bg-gray-900 border-b border-gray-800 px-6 py-4 flex items-center justify-between shadow-sm">
           <div className="flex items-center gap-4">
             <button
               onClick={handleBackToUsers}
-              className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="md:hidden p-2 rounded-full hover:bg-gray-800 transition-colors"
             >
-              <FiUsers className="text-gray-600" size={20} />
+              <FiUsers className="text-gray-400" size={20} />
             </button>
             <div>
-              <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <h1 className="text-xl font-bold text-gray-100 flex items-center gap-2">
                 {activeChat === 'global' ? (
                   <>
-                    <FiUser className="text-indigo-600" size={20} /> Global Chat
+                    <FiUser className="text-indigo-400" size={20} /> Global Chat
                   </>
                 ) : (
                   <>
-                    <FiUser className="text-indigo-600" size={20} /> {users.find(u => u.id === activeChat)?.name}
+                    <FiUser className="text-indigo-400" size={20} /> {users.find(u => u.id === activeChat)?.name}
                   </>
                 )}
               </h1>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-400 mt-1">
                 {activeChat === 'global' ? 'Public • Everyone can see' : 'Direct message'}
               </p>
             </div>
@@ -194,12 +202,11 @@ function App() {
               aria-label="Visit my site"
               className="flex items-center gap-2 px-3 py-1 rounded-md transition-transform duration-200 ease-out transform bg-transparent hover:bg-white/5 hover:-translate-y-0.5 hover:shadow-sm"
             >
-              <span className="hidden sm:inline text-xs md:text-sm text-gray-500">Made by</span>
-              <span className="text-sm md:text-base font-medium text-indigo-600 leading-none">Bivaas Baral</span>
+              <span className="hidden sm:inline text-xs md:text-sm text-gray-400">Made by</span>
+              <span className="text-sm md:text-base font-medium text-indigo-400 leading-none">Bivaas Baral</span>
             </a>
           </div>
         </div>
-        
         <div className="flex-1 overflow-hidden">
           <ChatRoom 
             currentUser={user} 
