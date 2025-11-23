@@ -46,6 +46,24 @@
     <!-- Preconnect to External Resources -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <!-- Google tag (gtag.js) - load async; init deferred to reduce render impact -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MTYYZ5XDP1"></script>
+    <script>
+      (function () {
+        function initGtag() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);} 
+          window.gtag = window.gtag || gtag;
+          gtag('js', new Date());
+          gtag('config', 'G-MTYYZ5XDP1');
+        }
+        if (typeof requestIdleCallback === 'function') {
+          requestIdleCallback(initGtag, { timeout: 2000 });
+        } else {
+          window.addEventListener('load', function () { setTimeout(initGtag, 200); });
+        }
+      })();
+    </script>
     
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
