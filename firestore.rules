@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper to detect admin via custom claim or admin email
+    function isAdmin() {
+      return request.auth != null && (
+        (request.auth.token.admin == true) || (request.auth.token.email == 'admin@chatapp.com')
+      );
+    }
+
+    // Protect user profiles: only owner can create/update their doc; admins can read/delete
+    match /users/{userId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['uid','name','email','isOnline','createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.email == request.auth.token.email
+        // limit creation timestamp skew (client should set server timestamp ideally)
+        && request.time.toMillis() - request.resource.data.createdAt.toMillis() < 60000;
+
+      allow update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if isAdmin();
+    }
+
+    // Admin documents only writeable/readable by admins
+    match /admin/{doc} {
+      allow read, write: if isAdmin();
+    }
+
+    // Basic protections for any messages stored in Firestore (if used)
+    match /messages/{messageId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        && request.resource.data.senderId == request.auth.uid
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 2000
+        && request.time.toMillis() - request.resource.data.timestamp.toMillis() <= 86400000;
+      allow update, delete: if isAdmin();
+    }
+  }
+}
