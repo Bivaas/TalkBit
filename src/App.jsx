@@ -5,7 +5,7 @@ import UserList from './components/userlist';
 import ChatRoom from './components/chatroom';
 import AdminDashboard from './components/AdminDashboard';
 import { auth, db, rtdb, ADMIN_EMAIL } from './firebase';
-import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut as firebaseSignOut, deleteUser } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { ref as rref, onValue as rOnValue, set as rset, onDisconnect, serverTimestamp } from 'firebase/database';
 
@@ -89,8 +89,29 @@ function App() {
       }
     }
 
-    // Sign out from Firebase
-    firebaseSignOut(auth).catch(console.error);
+    // If this is a guest (anonymous) user, delete the Firebase Auth user
+    // to avoid leaving orphaned guest accounts. For registered users just sign out.
+    if (user?.isGuest) {
+      try {
+        const current = auth.currentUser;
+        if (current && current.isAnonymous) {
+          // Delete anonymous user account
+          deleteUser(current).catch((err) => {
+            console.warn('Failed to delete anonymous user, falling back to signOut', err);
+            firebaseSignOut(auth).catch(console.error);
+          });
+        } else {
+          // Not currently authenticated with Firebase for some reason; ensure sign out
+          firebaseSignOut(auth).catch(console.error);
+        }
+      } catch (e) {
+        console.warn('Error deleting anonymous user', e);
+        firebaseSignOut(auth).catch(console.error);
+      }
+    } else {
+      // Registered user - just sign out
+      firebaseSignOut(auth).catch(console.error);
+    }
 
     setUser(null);
     setIsAdmin(false);
