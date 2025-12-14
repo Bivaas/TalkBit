@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FiSend } from 'react-icons/fi';
+import { FiSend, FiTrash2 } from 'react-icons/fi';
 import { rtdb } from '../firebase';
-import { ref as rref, onValue, push, serverTimestamp, set as rset } from 'firebase/database';
+import { ref as rref, onValue, push, serverTimestamp, set as rset, remove } from 'firebase/database';
 
-function ChatRoom({ currentUser, activeChat, users }) {
+function ChatRoom({ currentUser, activeChat, users, isAdmin }) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   
@@ -105,6 +105,22 @@ function ChatRoom({ currentUser, activeChat, users }) {
     return sender ? sender.name : 'Unknown';
   };
 
+  const handleDeleteMessage = async (messageId) => {
+    if (!isAdmin) return;
+    if (!window.confirm('Are you sure you want to delete this message?')) return;
+    try {
+      if (activeChat === 'global') {
+        await remove(rref(rtdb, `messages/global/${messageId}`));
+      } else {
+        const chatId = [currentUser.id, activeChat].sort().join('_');
+        await remove(rref(rtdb, `messages/direct/${chatId}/${messageId}`));
+      }
+    } catch (err) {
+      console.error('Failed to delete message:', err);
+      alert('Failed to delete message. Make sure you have admin permissions.');
+    }
+  };
+
   // Prevent guests from accessing private DM
   if (activeChat !== 'global' && currentUser.isGuest) {
     return (
@@ -144,17 +160,28 @@ function ChatRoom({ currentUser, activeChat, users }) {
                   <p className="text-xs text-gray-400 font-semibold px-3 mb-1">
                     {msg.senderName || 'Unknown'}
                   </p>
-                  <div
-                    className={`frosted-card minimal-shadow p-3 ${
-                      msg.senderId === currentUser.id
-                        ? 'bg-indigo-900/60 text-indigo-100'
-                        : 'bg-gray-800/60 text-gray-100'
-                    }`}
-                  >
-                    <p className="text-sm leading-relaxed">{msg.text}</p>
-                    <p className={`text-xs mt-2 opacity-70 ${msg.senderId === currentUser.id ? 'text-indigo-300' : 'text-gray-400'}`}>
-                      {formatTime(msg.timestamp)}
-                    </p>
+                  <div className="relative group">
+                    <div
+                      className={`frosted-card minimal-shadow p-3 ${
+                        msg.senderId === currentUser.id
+                          ? 'bg-indigo-900/60 text-indigo-100'
+                          : 'bg-gray-800/60 text-gray-100'
+                      }`}
+                    >
+                      <p className="text-sm leading-relaxed">{msg.text}</p>
+                      <p className={`text-xs mt-2 opacity-70 ${msg.senderId === currentUser.id ? 'text-indigo-300' : 'text-gray-400'}`}>
+                        {formatTime(msg.timestamp)}
+                      </p>
+                    </div>
+                    {isAdmin && (
+                      <button
+                        onClick={() => handleDeleteMessage(msg.id)}
+                        className="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg"
+                        title="Delete message"
+                      >
+                        <FiTrash2 className="text-xs" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

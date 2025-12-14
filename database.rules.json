@@ -4,7 +4,7 @@
       "global": {
         ".read": true,
         "$messageId": {
-          ".write": "newData.exists() && newData.child('chatType').val() === 'global' && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 5000 && newData.child('timestamp').isNumber() && newData.child('senderId').isString() && newData.child('senderName').isString()",
+          ".write": "(!newData.exists() && auth != null && auth.token.email === 'admin@chatapp.com') || (newData.exists() && newData.child('chatType').val() === 'global' && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 5000 && newData.child('timestamp').isNumber() && newData.child('senderId').isString() && newData.child('senderName').isString())",
           ".validate": "newData.hasChildren(['senderId','senderName','text','timestamp','chatType','chatId'])"
         }
       },
@@ -12,7 +12,7 @@
         "$chatId": {
           ".read": "auth != null",
           "$messageId": {
-            ".write": "auth != null && newData.exists() && newData.child('chatType').val() === 'direct' && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 5000 && newData.child('timestamp').isNumber()",
+            ".write": "(!newData.exists() && auth != null && auth.token.email === 'admin@chatapp.com') || (auth != null && newData.exists() && newData.child('chatType').val() === 'direct' && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 5000 && newData.child('timestamp').isNumber())",
             ".validate": "newData.hasChildren(['senderId','senderName','text','timestamp','chatType','chatId','receiverId'])"
           }
         }

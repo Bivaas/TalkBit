@@ -233,6 +233,7 @@ function App() {
             currentUser={user} 
             activeChat={activeChat}
             users={users}
+            isAdmin={isAdmin}
           />
         </div>
       </div>
