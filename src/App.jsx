@@ -216,7 +216,7 @@ function App() {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="https://bivaasbaral.netlify.app/"
+              href="https://bivaasbaral.com.np/"
               target="_blank"
               rel="noopener noreferrer"
               title="Visit my portfolio website"
