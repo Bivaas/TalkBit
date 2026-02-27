@@ -1,0 +1,26 @@
+{
+  "name": "Talkbit — Real-Time Chat & Messaging",
+  "short_name": "Talkbit",
+  "description": "Free, fast & secure real-time chat app. Instant messaging, group chats, private DMs — no download required. Built by Bivaas Baral.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "lang": "en",
+  "categories": ["social", "communication"],
+  "icons": [
+    {
+      "src": "/bell.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/bell.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# Talkbit — robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://talkbit.netlify.app/sitemap.xml

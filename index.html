@@ -5,54 +5,74 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    
-    <!-- SEO Meta Tags -->
-    <title>TalkBit</title>
-    <meta name="description" content="TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design." />
-    <meta name="keywords" content="chat, react, firebase, real-time, messaging, chat application" />
-    <meta name="author" content="Bivaas" />
-    <meta name="robots" content="index, follow" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Talkbit — Free Real-Time Chat & Instant Messaging Platform</title>
+    <meta name="description" content="Talkbit is a free real-time chat app for instant messaging, group chats & private conversations. Built by Bivaas Baral — fast, secure, no sign-up hassle." />
+    <meta name="keywords" content="Talkbit, Talkbits, Talkbit chat, Talkbit app, Talkbit messaging, Bivaas Baral, Bivaas Baral developer, free chat app, real-time chat platform, instant messaging app, online group chat, private chat room, free messaging web app, browser chat application, secure chat online, live chat platform" />
+    <meta name="author" content="Bivaas Baral" />
+    <meta name="creator" content="Bivaas Baral" />
+    <meta name="publisher" content="Bivaas Baral" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="language" content="English" />
-    <meta name="revisit-after" content="7 days" />
-    
-    <!-- Open Graph / Social Media Meta Tags -->
+    <meta name="revisit-after" content="3 days" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <link rel="canonical" href="https://talkbit.netlify.app/" />
+
+    <!-- Google Site Name (controls the name shown above the title in search results) -->
+    <meta name="application-name" content="Talkbit" />
+
+    <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://react-chat-app.vercel.app/" />
-    <meta property="og:title" content="TalkBit" />
-    <meta property="og:description" content="TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design." />
-    <meta property="og:image" content="/bell.png" />
+    <meta property="og:site_name" content="Talkbit" />
+    <meta property="og:url" content="https://talkbit.netlify.app/" />
+    <meta property="og:title" content="Talkbit — Free Real-Time Chat & Instant Messaging" />
+    <meta property="og:description" content="Chat instantly with anyone — group rooms, private DMs, guest access. Talkbit is a fast, free & secure messaging platform by Bivaas Baral." />
+    <meta property="og:image" content="https://talkbit.netlify.app/bell.png" />
+    <meta property="og:image:alt" content="Talkbit — Free Real-Time Chat App" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
     <meta property="og:locale" content="en_US" />
-    
+
     <!-- Twitter Card Meta Tags -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://react-chat-app.vercel.app/" />
-    <meta property="twitter:title" content="TalkBit" />
-    <meta property="twitter:description" content="TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design." />
-    <meta property="twitter:image" content="/bell.png" />
-    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://talkbit.netlify.app/" />
+    <meta name="twitter:title" content="Talkbit — Free Real-Time Chat & Messaging" />
+    <meta name="twitter:description" content="Chat instantly with anyone — group rooms, private DMs, guest access. Fast, free & secure. Built by Bivaas Baral." />
+    <meta name="twitter:image" content="https://talkbit.netlify.app/bell.png" />
+    <meta name="twitter:image:alt" content="Talkbit chat app logo" />
+
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#0f172a" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="TalkBit" />
-    
+    <meta name="apple-mobile-web-app-title" content="Talkbit" />
+    <meta name="format-detection" content="telephone=no" />
+
     <!-- Favicon & Icons -->
-    <link rel="icon" type="image/jpeg" href="/bell.png" />
-    <link rel="apple-touch-icon" href="/bell.png" />
-    
+    <link rel="icon" type="image/png" href="/bell.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/bell.png" />
+    <link rel="manifest" href="/manifest.json" />
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
+
     <!-- Preconnect to External Resources -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
     <!-- Google tag (gtag.js) - load async; init deferred to reduce render impact -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MTYYZ5XDP1"></script>
     <script>
       (function () {
         function initGtag() {
           window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);} 
+          function gtag(){dataLayer.push(arguments);}
           window.gtag = window.gtag || gtag;
           gtag('js', new Date());
           gtag('config', 'G-MTYYZ5XDP1');
@@ -64,35 +84,81 @@
         }
       })();
     </script>
-    
-    <!-- Structured Data (Schema.org) -->
+
+    <!-- Structured Data — WebSite (enables Google site name + sitelinks search) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Talkbit",
+      "alternateName": ["Talkbits", "TalkBit"],
+      "url": "https://talkbit.netlify.app/"
+    }
+    </script>
+
+    <!-- Structured Data — WebApplication (rich result) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "TalkBit",
-      "description": "TalkBit is a real-time chat platform with secure authentication, direct and group messaging, user presence, admin dashboard, and a modern responsive design.",
-      "url": "https://react-chat-app.vercel.app/",
+      "name": "Talkbit",
+      "alternateName": "Talkbits",
+      "headline": "Talkbit — Free Real-Time Chat & Instant Messaging Platform",
+      "description": "Talkbit is a free, fast and secure real-time chat web app for instant messaging, group conversations, and private direct messages. No download required.",
+      "url": "https://talkbit.netlify.app/",
       "applicationCategory": "CommunicationApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires a modern web browser",
+      "softwareVersion": "1.0.0",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
       },
       "author": {
         "@type": "Person",
-        "name": "Bivaas"
+        "name": "Bivaas Baral",
+        "url": "https://talkbit.netlify.app/"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Bivaas Baral"
       },
       "featureList": [
         "Real-time global and private chat",
         "Secure Firebase authentication",
-        "Google and guest login options",
-        "Direct and group messaging",
-        "User presence and status",
+        "Google sign-in and guest login",
+        "Direct messages and group chat rooms",
+        "Online presence and user status",
         "Admin dashboard for user management",
-        "Modern, responsive design",
-        "Emoji and media support"
-      ]
+        "Modern responsive dark-mode UI",
+        "Emoji and media support",
+        "No download or install required"
+      ],
+      "screenshot": "https://talkbit.netlify.app/bell.png",
+      "image": "https://talkbit.netlify.app/bell.png"
+    }
+    </script>
+
+    <!-- Structured Data — Person (developer branding) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Bivaas Baral",
+      "jobTitle": "Web Developer",
+      "knowsAbout": ["React", "Firebase", "JavaScript", "Web Development"],
+      "makesOffer": {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "WebApplication",
+          "name": "Talkbit",
+          "url": "https://talkbit.netlify.app/"
+        }
+      }
     }
     </script>
   </head>
